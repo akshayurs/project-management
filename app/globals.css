@@ -2,22 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
 @layer base {
   :root {
-    --background: 200 20% 98%;
+    --background: 20 38% 94%;
     --btn-background: 200 10% 91%;
     --btn-background-hover: 200 10% 89%;
     --foreground: 200 50% 3%;
   }
 
-  @media (prefers-color-scheme: dark) {
+  /* @media (prefers-color-scheme: dark) {
     :root {
       --background: 200 50% 3%;
       --btn-background: 200 10% 9%;
       --btn-background-hover: 200 10% 12%;
       --foreground: 200 20% 96%;
     }
-  }
+  } */
 }
 
 @layer base {
@@ -35,8 +37,19 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
 }
