@@ -2,8 +2,9 @@
 import { Profile, Projects } from "@/types/types";
 import { sendReq } from "@/utils/sendReq";
 import { DeleteOutlined } from "@ant-design/icons";
-import { AutoComplete, Button, Form, Input, Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import Table, { ColumnsType } from "antd/es/table";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 function RenderTable({
@@ -19,6 +20,7 @@ function RenderTable({
 		if (projects) setProjectsUpdated(projects);
 	}, []);
 	const [projectsUpdated, setProjectsUpdated] = useState<Projects[]>([]);
+
 	const columns: ColumnsType<Projects> = [
 		{
 			key: "id",
@@ -53,7 +55,7 @@ function RenderTable({
 			render: (val, record) => (
 				<Input.TextArea
 					placeholder="Project Name"
-					value={val.join(", ")}
+					value={val?.join(", ")}
 					onChange={(newVal) => {
 						setProjectsUpdated((prev) => {
 							return prev.map((pro) => {
@@ -95,18 +97,20 @@ function RenderTable({
 							)?.id;
 							// Handle the mentor selection logic here
 							setProjectsUpdated((prev) => {
-								return prev.map((pro) => {
-									if (pro.id === record.id) {
-										pro.mentor_id = selected ?? null;
-									}
-									return pro;
-								});
+								return [
+									...prev.map((pro) => {
+										if (pro.id === record.id) {
+											pro.mentor_id = selected ?? null;
+										}
+										return pro;
+									}),
+								];
 							});
 						}}
 					>
 						{mentors?.map((mentor) => (
 							<Select.Option
-								key={"mentor-id" + mentor.id}
+								key={"mentor-id-table-" + mentor.id}
 								value={mentor.name}
 							>
 								{mentor.name}
@@ -157,10 +161,12 @@ function RenderTable({
 						)?.id;
 						// Handle the mentor selection logic here
 						setProjectsUpdated((prev) => {
-							return prev.map((pro) => {
-								pro.mentor_id = selected ?? null;
-								return pro;
-							});
+							return [
+								...prev.map((pro) => {
+									pro.mentor_id = selected ?? null;
+									return pro;
+								}),
+							];
 						});
 					}}
 				>
@@ -177,6 +183,7 @@ function RenderTable({
 			<Table
 				dataSource={
 					projectsUpdated?.map((val, index) => ({
+						key: val.id,
 						...val,
 						index: index + 1,
 					})) ?? []

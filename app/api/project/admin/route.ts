@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
 	const body = await request.json();
 	const supabase = createClient(cookies());
 	const { data, error } = await supabase.from("projects").insert(body);
-	return NextResponse.json({ success: error == null, data });
+	return NextResponse.json({ success: error == null, data, error });
 }
 export async function PUT(request: NextRequest) {
 	if (!request.nextUrl.searchParams.has("event_id")) {

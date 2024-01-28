@@ -41,6 +41,9 @@ const FileUpload = ({
 
 	return (
 		<div className="mb-3 space-x-2">
+			<div className="mb-2 font-bold text-xl">
+				Upload Project with .xlsx File
+			</div>
 			<Upload
 				beforeUpload={beforeUpload}
 				maxCount={1}

@@ -49,6 +49,18 @@ export default function ListAllEvents({ events }: { events: Events[] }) {
 			),
 		},
 		{
+			key: "announcement",
+			title: "Announcement",
+			dataIndex: "id",
+			render: (id) => (
+				<Link href={"/admin/announcement/" + id}>
+					<Button className="flex justify-center items-center">
+						<EditOutlined />
+					</Button>
+				</Link>
+			),
+		},
+		{
 			key: "editphase",
 			title: "Phase/Eval",
 			dataIndex: "id",

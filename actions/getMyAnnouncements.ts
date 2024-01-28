@@ -3,17 +3,18 @@ import { cookies } from "next/headers";
 import { Announcements } from "@/types/types";
 
 interface Props {
-	event_id: number;
+	event_ids: number[];
 }
 
-const getAllAnnouncements = async ({ event_id }: Props) => {
+const getMyAnnouncements = async ({ event_ids }: Props) => {
 	const supabase = createClient(cookies());
 
 	const { data: announcements } = await supabase
 		.from("announcements")
 		.select(`*`)
-		.eq("event_id", event_id);
+		.in("event_id", event_ids)
+		.order("created_at", { ascending: false });
 	return announcements as Announcements[];
 };
 
-export default getAllAnnouncements;
+export default getMyAnnouncements;

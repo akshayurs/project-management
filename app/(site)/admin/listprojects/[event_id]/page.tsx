@@ -4,6 +4,7 @@ import getProfile from "@/actions/getProfile";
 import Table from "./table";
 import FileUpload from "./fileUpload";
 import getAllMentors from "@/actions/getAllMentors";
+import NewProject from "./NewProject";
 
 export default async function ListAll({
 	params,
@@ -15,12 +16,11 @@ export default async function ListAll({
 	const projects = await getAllProjects({ event_id });
 	const profile = await getProfile();
 	const mentors = await getAllMentors();
+	console.log({ projects });
 	return (
 		<div className="p-5">
-			<div className="mb-2 font-bold text-xl">
-				Upload Project with .xlsx File
-			</div>
 			<FileUpload profile={profile} event_id={event_id} />
+			<NewProject event_id={event_id} profile={profile} />
 			<Table projects={projects} mentors={mentors} event_id={event_id} />
 			<DeleteAll event_id={event_id} />
 		</div>
