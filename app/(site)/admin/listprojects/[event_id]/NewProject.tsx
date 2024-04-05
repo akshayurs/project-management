@@ -37,6 +37,7 @@ function NewProject({
 					});
 					form.resetFields();
 					router.refresh();
+					location.reload();
 				}}
 				className="flex gap-3"
 			>

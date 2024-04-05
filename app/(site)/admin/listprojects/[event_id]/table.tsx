@@ -54,7 +54,7 @@ function RenderTable({
 			dataIndex: "members",
 			render: (val, record) => (
 				<Input.TextArea
-					placeholder="Project Name"
+					placeholder="emails"
 					value={val?.join(", ")}
 					onChange={(newVal) => {
 						setProjectsUpdated((prev) => {
